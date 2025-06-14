@@ -1,3 +1,5 @@
+import uvicorn                                  # ASGI сервер (Asynchronous Server Gateway Interface)
+
 from fastapi import FastAPI, Request            # для работы с HTTP запросами
 from fastapi.responses import HTMLResponse      # для возврата HTML страниц и работы Jinja2
 from fastapi.templating import Jinja2Templates  # шаблонизатор Jinja2 для рендеринга HTML с переменными
@@ -33,3 +35,8 @@ async def send(msg: Message):    # Асинхронный обработчик P
 async def stream():        # Асинхронный обработчик GET "/stream"
     return latest_message  # Возвращаем последнее сообщение (FastAPI сам сериализует в JSON)
     # (Иначе нет API для получения данных на клиент для динамического обновления)
+
+
+# ⬇️ Эта часть позволяет запускать main.py напрямую (например, python main.py)
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=9000, log_level="info", reload=True)
