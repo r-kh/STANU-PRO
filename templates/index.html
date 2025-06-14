@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>STANU.PRO</title>
+</head>
+<body>
+    <h1 id="msg">Загрузка...</h1>
+    <script>
+        async function fetchMsg() {
+            const res = await fetch("/stream");
+            const data = await res.json();
+            document.getElementById("msg").innerText = data.text;
+        }
+        setInterval(fetchMsg, 1000);
+        fetchMsg();
+    </script>
+</body>
+</html>
