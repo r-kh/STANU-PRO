@@ -5,12 +5,19 @@
     <title>STANU.PRO</title>
 </head>
 <body>
-    <h1 id="msg">Загрузка...</h1>
+    <p><strong>Вопрос:</strong></p>
+    <p id="msg">Загрузка...</p>
+
+    <p><strong>Ответ:</strong></p>
+    <p id="answer">...</p>
+
+
     <script>
         async function fetchMsg() {
             const res = await fetch("/stream");
             const data = await res.json();
             document.getElementById("msg").innerText = data.text;
+            document.getElementById("answer").innerText = data.answer || "Ответ пока не получен";
         }
         setInterval(fetchMsg, 1000);
         fetchMsg();
